@@ -1,4 +1,4 @@
-
+from .generate import generate
 import json
 from pathlib import Path
 
@@ -46,10 +46,15 @@ def main():
         candidates = [documents[i] for i in indices]
         results = rerank(query, candidates, reranker)
 
-        for doc in results:
-            print(f"\nRerank score: {doc['rerank_score']:.4f}")
-            print(doc["text"][:500])
+        answer = generate(query, results)
+        print(f"\nAnswer:\n{answer}")
+        
+        print("\n--- Retrieved Sources ---")
 
+        for i, doc in enumerate(results, 1):
+            print(f"\n[{i}] Source: {doc['id']}")
+            print(f"Rerank score: {doc['rerank_score']:.4f}")
+            print(doc["text"])
 
 if __name__ == "__main__":
     main()
