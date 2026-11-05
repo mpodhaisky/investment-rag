@@ -22,7 +22,7 @@ def chunk_text(text):
 def main():
     count = 0
 
-    with (DATA_DIR / "raw.jsonl").open(encoding="utf-8") as source, \
+    with (DATA_DIR / "filtered.jsonl").open(encoding="utf-8") as source, \
          (DATA_DIR / "chunks.jsonl").open("w", encoding="utf-8") as target:
 
         for row_id, line in enumerate(source):
